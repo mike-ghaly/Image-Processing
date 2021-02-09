@@ -141,8 +141,6 @@ def stitch(topImg, _2, _3, _4, _5):
     # _4 = getPerspectiveTransform(_4)
     # _5 = getPerspectiveTransform(_5)
 
-    blanck = np.zeros(_1.shape, np.uint8)
-
     com = _1
     comMask = crop(com, "down")
     _2Mask = crop(_2, "up")
@@ -196,7 +194,10 @@ def stitch(topImg, _2, _3, _4, _5):
     _4 = final_4
     _5 = final_5
 
-    im_tile_resize = concat_tile_resize([[blanck, _1, blanck, blanck],
+    blanck1 = np.zeros(_1.shape, np.uint8)
+    blanck2 = np.zeros(_2.shape, np.uint8)
+
+    im_tile_resize = concat_tile_resize([[blanck2, _1, blanck2,blanck1],
                                          [_2, _3, _4,_5]])
     im_tile_resize = imgscal(im_tile_resize, 50)
     cv2.imshow("After the Model", im_tile_resize)
